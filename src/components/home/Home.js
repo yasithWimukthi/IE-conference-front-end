@@ -16,17 +16,11 @@ const Home = () => {
 
   const history = useHistory();
 
-  // useEffect(() => {
-  //   if (user) {
-  //     loadMeetings();
-  //   }
-  // }, [user, hasNewMeeting]);
-
   useEffect(() => {
     if (user) {
       loadMeetings();
     }
-  }, []);
+  }, [user, hasNewMeeting]);
 
   const loadMeetings = async () => {
     if (user) {
