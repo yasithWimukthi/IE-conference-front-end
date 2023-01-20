@@ -10,17 +10,11 @@ const Meeting = () => {
 
     const history = useHistory();
 
-    // useEffect(() => {
-    //     if (meeting && cometChat) {
-    //         startDirectCall();
-    //     }
-    // }, [meeting, cometChat]);
-
     useEffect(() => {
         if (meeting && cometChat) {
             startDirectCall();
         }
-    }, []);
+    }, [meeting, cometChat]);
 
     const startDirectCall = () => {
         if (cometChat && meeting) {
