@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: 16.x
       - name: Install React HTML parser
-        run: npm install react-html-parser --force
+        run: npm install react-html-parser --legacy-peer-deps
       - name: Install NPM Dependencies
         run: npm i
       - name: Build Project
