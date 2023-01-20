@@ -1,17 +1,17 @@
-import { useState } from 'react';
+import {useState} from 'react';
 
 const withModal = ModalComponent => WrapperComponent => {
-  return function (props) { 
+    return function (props) {
 
-    const [isModalShown, setIsModalShown] = useState(false);
-    
-    return (
-      <>
-        <WrapperComponent toggleModal={setIsModalShown} {...props} />
-        {isModalShown && <ModalComponent toggleModal={setIsModalShown} />}
-      </>
-    )
-  }
+        const [isModalShown, setIsModalShown] = useState(false);
+
+        return (
+            <>
+                <WrapperComponent toggleModal={setIsModalShown} {...props} />
+                {isModalShown && <ModalComponent toggleModal={setIsModalShown}/>}
+            </>
+        )
+    }
 }
 
 export default withModal;
