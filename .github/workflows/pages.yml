@@ -22,10 +22,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 16.x
-      - name: Install React HTML parser
-        run: npm install react-html-parser --legacy-peer-deps
       - name: Install NPM Dependencies
-        run: npm i
+        run: npm install --legacy-peer-deps
       - name: Build Project
         run: npm run build
       - name: Upload artifact in order to deploy
