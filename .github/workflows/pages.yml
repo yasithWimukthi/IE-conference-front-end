@@ -22,6 +22,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 16.x
+      - name: Install React HTML parser
+        run: npm install react-html-parser --force
       - name: Install NPM Dependencies
         run: npm i
       - name: Build Project
