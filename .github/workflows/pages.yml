@@ -12,7 +12,7 @@ jobs:
   build:
     # Name of the job
     name: Build
-    # The OS to run the job on
+    # The OS to run the job on (Ubuntu)
     runs-on: ubuntu-latest
     # Steps
     steps:
