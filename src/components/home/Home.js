@@ -45,6 +45,7 @@ const Home = () => {
     setMeeting(meeting);
     localStorage.setItem('meeting', JSON.stringify(meeting));
     history.push('/meeting');
+
   };
 
   return (
