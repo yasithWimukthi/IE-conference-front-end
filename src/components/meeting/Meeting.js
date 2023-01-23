@@ -16,6 +16,7 @@ const Meeting = () => {
         }
     }, [meeting, cometChat]);
 
+
     const startDirectCall = () => {
         if (cometChat && meeting) {
             const sessionID = meeting.meeting_uid;
