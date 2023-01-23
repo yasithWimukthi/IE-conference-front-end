@@ -30,7 +30,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: production-files
-          path: ./dist
+          path: ./build
   # Deploy Job
   deploy:
     name: Deploy
@@ -49,4 +49,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v2
         with:
           github_token: ${{ secrets.GH_ACCESS_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./build
