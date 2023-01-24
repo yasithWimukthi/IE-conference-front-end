@@ -51,3 +51,4 @@ jobs:
           ACTIONS_DEPLOY_KEY: ${{ secrets.GH_ACCESS_TOKEN }}
           publish_dir: ./build
           PUBLISH_BRANCH: master
+          PUBLISH_DIR: ./build
