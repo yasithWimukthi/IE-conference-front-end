@@ -40,7 +40,7 @@ const Join = (props) => {
     let meeting = null;
     try {
       setIsLoading(true);
-      const url = `http://localhost:8080/meetings/${meetingId}/get`;
+      const url = `${process.env.REACT_APP_BACKEND_URL}/meetings/${meetingId}/get`;
       const response = await axios.get(url);
       if (response && response.data && response.data.length) {
         meeting = response.data[0];

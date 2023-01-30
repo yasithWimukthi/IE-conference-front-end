@@ -25,7 +25,7 @@ const Home = () => {
   const loadMeetings = async () => {
     if (user) {
       setIsLoading(true);
-      const url = `http://localhost:8080/meetings/${user.id}`;
+      const url = `${process.env.REACT_APP_BACKEND_URL}/meetings/${user.id}`;
       const response = await axios.get(url);
       const meetings = response.data;
       setMeetings(() => meetings);
