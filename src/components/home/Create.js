@@ -29,7 +29,7 @@ const Create = (props) => {
     }
     try {
       setIsLoading(true);
-      const url = 'http://localhost:8080/meetings';
+      const url = `${process.env.REACT_APP_BACKEND_URL}/meetings` ;
       await axios.post(url, { name, uid, createdBy: user.id });
       await createCometChatGroup({ uid, name });
       alert(`${name} was created successfully, you can share the meeting id to other users`);
