@@ -51,6 +51,7 @@ const Login = (props) => {
                 const authenticatedUser = await signin(email, password);
                 const cometChatAccount = await loginCometChat({id: authenticatedUser.data.id});
                 if (cometChatAccount) {
+                    authenticatedUser.data.user_password = null;
                     localStorage.setItem('auth', JSON.stringify(authenticatedUser.data));
                     setUser(authenticatedUser.data);
                     setIsLoading(false);
