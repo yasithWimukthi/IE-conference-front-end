@@ -48,7 +48,9 @@ function SignUp(props) {
 
   const createUser = async ({ id, email, password, fullname, avatar }) => {
     const url = `${process.env.REACT_APP_BACKEND_URL}/users/create`;
-    return await axios.post(url, { id, email, password, fullname, avatar })
+    return await axios.post(url, { id, email, password, fullname, avatar },  {headers: {
+      'content-type': 'text/json'
+    }})
         .then(response => response.data)
         .catch(error => console.log(error));
   };
