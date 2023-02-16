@@ -373,7 +373,7 @@ class CometChatCallScreen extends React.PureComponent {
                 onUserJoined: user => {
 
                     /* Notification received here if another user joins the call. */
-                    /* this method can be use to display message or perform any actions if someone joining the call */
+                    /* this method can be used to display message or perform any actions if someone joining the call */
                     //call initiator gets the same info in outgoingcallaccpeted event
                     if (call.callInitiator.uid !== this.loggedInUser.uid && call.callInitiator.uid !== user.uid) {
 
