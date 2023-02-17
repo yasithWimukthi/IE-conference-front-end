@@ -135,7 +135,7 @@ function SignUp(props) {
             ref={confirmPasswordRef}
           />
           <button className="signup__btn" onClick={signup}>
-            Sign Up
+            Sign
           </button>
         </div>
       </div>
