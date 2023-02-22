@@ -27,28 +27,18 @@ const Meeting = () => {
                 .setSessionID(sessionID)
                 .setIsAudioOnlyCall(audioOnly)
                 .build();
-            cometChat.startCall(
-                callSettings,
-                document.getElementById("call__screen"),
-                new cometChat.OngoingCallListener({
-                    onUserListUpdated: userList => {
-                    },
-                    onCallEnded: call => {
-                        history.push('/');
-                    },
-                    onError: error => {
-                        history.push('/');
-                    },
-                    onMediaDeviceListUpdated: deviceList => {
-                    },
-                    onUserMuted: (userMuted, userMutedBy) => {
-                    },
-                    onScreenShareStarted: () => {
-                    },
-                    onScreenShareStopped: () => {
-                    }
-                })
-            );
+            cometChat.startCall(callSettings, document.getElementById("call__screen"), new cometChat.OngoingCallListener({
+                onUserListUpdated: userList => {
+                }, onCallEnded: call => {
+                    history.push('/');
+                }, onError: error => {
+                    history.push('/');
+                }, onMediaDeviceListUpdated: deviceList => {
+                }, onUserMuted: (userMuted, userMutedBy) => {
+                }, onScreenShareStarted: () => {
+                }, onScreenShareStopped: () => {
+                }
+            }));
         }
     };
 
@@ -56,8 +46,7 @@ const Meeting = () => {
         return <></>;
     }
 
-    return (
-        <>
+    return (<>
             <MeetingHeader/>
             <div className="meeting">
                 <div className="meeting__left">
@@ -67,8 +56,7 @@ const Meeting = () => {
                     <CometChatMessages chatWithGroup={meeting.meeting_uid}/>
                 </div>
             </div>
-        </>
-    );
+        </>);
 };
 
 export default Meeting;
