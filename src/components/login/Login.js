@@ -40,9 +40,11 @@ const Login = (props) => {
 
     const signin = async (email, password) => {
         const url = `${process.env.REACT_APP_BACKEND_URL}/login`;
-        return await axios.post(url, {email, password},{headers: {
+        return await axios.post(url, {email, password}, {
+            headers: {
                 "Content-Type": "application/json"
-            }})
+            }
+        })
             .then(response => {
                 return response
             })
