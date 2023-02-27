@@ -1,16 +1,16 @@
 import React from "react";
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, keyframes } from "@emotion/core";
+import {jsx, keyframes} from "@emotion/core";
 import PropTypes from "prop-types";
 
-import { CometChat } from "@cometchat-pro/chat";
+import {CometChat} from "@cometchat-pro/chat";
 
-import { CometChatContext } from "../../../util/CometChatContext";
-import { Storage } from "../../../util/Storage";
+import {CometChatContext} from "../../../util/CometChatContext";
+import {Storage} from "../../../util/Storage";
 import * as enums from "../../../util/enums.js";
 
-import { theme } from "../../../resources/theme";
+import {theme} from "../../../resources/theme";
 import Translator from "../../../resources/localization/translator";
 
 import {
@@ -44,7 +44,7 @@ class CometChatCallScreen extends React.PureComponent {
         };
 
         this.loggedInUser = props.loggedInUser;
-        
+
         this.callScreenBackgroundEl = React.createRef();
         this.callScreenInnerBackgroundEl = React.createRef();
         this.callScreenEl = React.createRef();
@@ -65,7 +65,7 @@ class CometChatCallScreen extends React.PureComponent {
     enableDragging = (e) => {
 
         e.preventDefault();
-        
+
         if (this.checkIfCallScreenIsMaximized() === true) {
             return false;
         }
@@ -120,15 +120,15 @@ class CometChatCallScreen extends React.PureComponent {
     }
 
     startDragging = (e) => {
-        
+
         if (!this.state.dragging) return;
-        
+
         e = e || window.event;
 
         const elem = this.callScreenEl.current;
 
-        const dialogWidth = elem.clientWidth; 
-        const dialogHeight = elem.clientHeight; 
+        const dialogWidth = elem.clientWidth;
+        const dialogHeight = elem.clientHeight;
         const x = Math.min(
             Math.max(0, e.pageX - this.state.rel.x),
             window.innerWidth - dialogWidth - 20
@@ -136,7 +136,7 @@ class CometChatCallScreen extends React.PureComponent {
         const y = Math.min(
             Math.max(0, e.pageY - this.state.rel.y),
             window.innerHeight - dialogHeight - 20
-        ); 
+        );
 
         this.setState({
             x: x,
@@ -152,7 +152,7 @@ class CometChatCallScreen extends React.PureComponent {
         this.document.onmousemove = null;
         this.document.onmouseup = null;
 
-        this.setState({ dragging: false });
+        this.setState({dragging: false});
 
         this.toggleCallScreenBackground(false);
         this.toggleCallScreenInnerBackground(false);
@@ -179,7 +179,7 @@ class CometChatCallScreen extends React.PureComponent {
     }
 
     startResize = (e) => {
-        
+
         let width = this.startWidth + (e.pageX - this.startX);
         let height = this.startHeight + (e.pageY - this.startY);
 
@@ -202,14 +202,14 @@ class CometChatCallScreen extends React.PureComponent {
         this.callScreenEl.current.style.width = width + "px";
         this.callScreenEl.current.style.height = height + "px";
 
-        this.setDimensionOfCallScreenInnerBackground({ width: width + "px", height: height + "px" });
+        this.setDimensionOfCallScreenInnerBackground({width: width + "px", height: height + "px"});
 
         this.toggleCallScreenBackground(true);
         this.toggleCallScreenInnerBackground(true);
     }
 
     stopResize = () => {
-        
+
         this.document.onmousemove = null;
         this.document.onmouseup = null;
 
@@ -217,10 +217,10 @@ class CometChatCallScreen extends React.PureComponent {
         this.toggleCallScreenInnerBackground(false);
 
         if (this.checkIfCallScreenIsMaximized() === true) {
-            this.setState({ maximized: true });
-        } 
+            this.setState({maximized: true});
+        }
         if (this.checkIfCallScreenIsMinimized() === true) {
-            this.setState({ maximized: false });
+            this.setState({maximized: false});
         }
     }
 
@@ -259,10 +259,10 @@ class CometChatCallScreen extends React.PureComponent {
         const width = this.props.minWidth + "px";
         const height = this.props.minHeight + "px";
 
-        this.setState({ maximized: false });
-        this.setSizingAndPostionOfCallScreen({ width: width, height: height });
-        this.setDimensionOfCallScreenInnerBackground({ width: width, height: height });
-        this.setPositionOfCallScreenInnerBackground({ x: "0px", y: "0px" });
+        this.setState({maximized: false});
+        this.setSizingAndPostionOfCallScreen({width: width, height: height});
+        this.setDimensionOfCallScreenInnerBackground({width: width, height: height});
+        this.setPositionOfCallScreenInnerBackground({x: "0px", y: "0px"});
     }
 
     maximize = () => {
@@ -274,10 +274,10 @@ class CometChatCallScreen extends React.PureComponent {
         const width = this.props.maxWidth;
         const height = this.props.maxHeight;
 
-        this.setState({ maximized: true });
-        this.setSizingAndPostionOfCallScreen({ width: width, height: height });
-        this.setDimensionOfCallScreenInnerBackground({ width: width, height: height });
-        this.setPositionOfCallScreenInnerBackground({ x: "0px", y: "0px" });
+        this.setState({maximized: true});
+        this.setSizingAndPostionOfCallScreen({width: width, height: height});
+        this.setDimensionOfCallScreenInnerBackground({width: width, height: height});
+        this.setPositionOfCallScreenInnerBackground({x: "0px", y: "0px"});
     }
 
     setSizingAndPostionOfCallScreen = (props) => {
@@ -290,7 +290,7 @@ class CometChatCallScreen extends React.PureComponent {
 
     toggle = (e) => {
 
-        this.setState({ x: 0, y: 0 });
+        this.setState({x: 0, y: 0});
 
         if (this.state.maximized) {
             this.minimize();
@@ -337,7 +337,7 @@ class CometChatCallScreen extends React.PureComponent {
                     if (this.context) {
                         this.context.setCallInProgress(null, "");
                     }
-                    
+
                     this.props.actionGenerated(enums.ACTIONS["DIRECT_CALL_ERROR"]);
                     const errorCode = (error && error.hasOwnProperty("code")) ? error.code : "ERROR";
                     this.context.setToastMessage("error", errorCode);
@@ -387,7 +387,7 @@ class CometChatCallScreen extends React.PureComponent {
                             "receiverId": call.receiverId,
                             "receiverType": call.receiverType,
                             "sentAt": call.sentAt,
-                            "sender": { ...user }
+                            "sender": {...user}
                         };
                         this.props.actionGenerated(enums.ACTIONS["USER_JOINED_CALL"], callMessage);
                     }
@@ -408,7 +408,7 @@ class CometChatCallScreen extends React.PureComponent {
                             "receiverId": call.receiverId,
                             "receiverType": call.receiverType,
                             "sentAt": call.sentAt,
-                            "sender": { ...user }
+                            "sender": {...user}
                         };
 
                         this.props.actionGenerated(enums.ACTIONS["USER_LEFT_CALL"], callMessage);
@@ -439,15 +439,24 @@ class CometChatCallScreen extends React.PureComponent {
         return (
             <React.Fragment>
                 <div css={callScreenBackgroundStyle(this.state)} ref={this.callScreenBackgroundEl}></div>
-                <div ref={this.callScreenEl} className="callscreen__container" css={callScreenContainerStyle(this.props)} 
-                    style={{ top: this.state.y + "px", left: this.state.x + "px" }}>
+                <div ref={this.callScreenEl} className="callscreen__container"
+                     css={callScreenContainerStyle(this.props)}
+                     style={{top: this.state.y + "px", left: this.state.x + "px"}}>
                     <div css={callScreenInnerBackgroundStyle()} ref={this.callScreenInnerBackgroundEl}></div>
-                    <div css={callScreenHeaderStyle(this.state)} className="callscreen__header" onMouseDown={this.enableDragging}>
+                    <div css={callScreenHeaderStyle(this.state)} className="callscreen__header"
+                         onMouseDown={this.enableDragging}>
                         <div css={headerTitleStyle()}>&nbsp;</div>
-                        <div className="callscreen__resize" css={headerButtonStyle()} onClick={this.toggle} onMouseDown={e => e.stopPropagation()}><button type="button" title={resizeText}>{iconView}</button></div>
+                        <div className="callscreen__resize" css={headerButtonStyle()} onClick={this.toggle}
+                             onMouseDown={e => e.stopPropagation()}>
+                            <button type="button" title={resizeText}>{iconView}</button>
+                        </div>
                     </div>
-                    <div css={callScreenWrapperStyle(this.props, keyframes)} className="callscreen__wrapper" ref={el => { this.callScreenFrame = el; }}></div>
-                    <div css={callScreenResizerStyle(this.state)} className="callscreen__resizer-both" onMouseDown={this.initResize}></div>
+                    <div css={callScreenWrapperStyle(this.props, keyframes)} className="callscreen__wrapper"
+                         ref={el => {
+                             this.callScreenFrame = el;
+                         }}></div>
+                    <div css={callScreenResizerStyle(this.state)} className="callscreen__resizer-both"
+                         onMouseDown={this.initResize}></div>
                 </div>
             </React.Fragment>
         )
@@ -475,4 +484,4 @@ CometChatCallScreen.propTypes = {
     style: PropTypes.object,
 }
 
-export { CometChatCallScreen }
+export {CometChatCallScreen}
