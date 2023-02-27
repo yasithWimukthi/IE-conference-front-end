@@ -1,14 +1,12 @@
-
-
 export const callScreenWrapperStyle = (props, keyframes) => {
 
     const fadeAnimation = keyframes`
-    from {
+      from {
         opacity: 0;
-    }
-    to {
+      }
+      to {
         opacity: 1;
-    }`;
+      }`;
 
     return {
         width: "100%",
@@ -142,7 +140,7 @@ export const headerButtonStyle = () => {
 
 export const callScreenResizerStyle = (state) => {
 
-    const backgroundStyle = (state.maximized) ? {}: {
+    const backgroundStyle = (state.maximized) ? {} : {
         cursor: "nwse-resize",
         clipPath: "polygon(100% 0,100% 100%,0 100%)",
         background: "repeating-linear-gradient(135deg,hsla(0,0%,100%,.5),hsla(0,0%,100%,.5) 2px,#000 0,#000 4px)",
@@ -154,7 +152,7 @@ export const callScreenResizerStyle = (state) => {
         position: "absolute",
         right: "0",
         bottom: "0",
-        zIndex: "2147483004", 
+        zIndex: "2147483004",
         ...backgroundStyle
     }
 }
