@@ -1,8 +1,12 @@
 export const incomingCallWrapperStyle = (props, keyframes) => {
 
     const slideDown = keyframes`
-    0% { transform: translateY(-50px); }
-    100% { transform: translateY(0px); }
+      0% {
+        transform: translateY(-50px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
     `;
 
     let positionValue = "absolute";
@@ -198,26 +202,26 @@ export const ButtonStyle = (props, action) => {
     const backgroundColor = (action) ? `${props.theme.backgroundColor.blue}!important` : `${props.theme.backgroundColor.red}!important`;
 
     return {
-			cursor: "pointer",
-			padding: "8px 16px",
-			backgroundColor: backgroundColor,
-			borderRadius: "5px",
-			color: `${props.theme.color.white}`,
-			fontSize: "100%",
-			outline: "0",
-			border: "0",
-			width: "49%",
-			overflow: "hidden",
-		};
+        cursor: "pointer",
+        padding: "8px 16px",
+        backgroundColor: backgroundColor,
+        borderRadius: "5px",
+        color: `${props.theme.color.white}`,
+        fontSize: "100%",
+        outline: "0",
+        border: "0",
+        width: "49%",
+        overflow: "hidden",
+    };
 }
 
 export const callIconStyle = (img, context) => {
-	return {
-		width: "24px",
-		height: "24px",
-		display: "inline-block",
-		cursor: "pointer",
-		mask: `url(${img}) center center no-repeat`,
-		backgroundColor: `${context.theme.secondaryTextColor}`,
-	};
+    return {
+        width: "24px",
+        height: "24px",
+        display: "inline-block",
+        cursor: "pointer",
+        mask: `url(${img}) center center no-repeat`,
+        backgroundColor: `${context.theme.secondaryTextColor}`,
+    };
 };
