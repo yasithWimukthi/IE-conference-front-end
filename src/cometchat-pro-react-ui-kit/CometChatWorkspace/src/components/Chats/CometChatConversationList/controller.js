@@ -1,7 +1,7 @@
-import { CometChat } from "@cometchat-pro/chat";
+import {CometChat} from "@cometchat-pro/chat";
 
 import * as enums from "../../../util/enums.js";
-import { UIKitSettings } from "../../../util/UIKitSettings";
+import {UIKitSettings} from "../../../util/UIKitSettings";
 
 export class ConversationListManager {
 
@@ -20,13 +20,13 @@ export class ConversationListManager {
         switch (chatListMode) {
             case chatListFilterOptions["USERS"]:
                 this.conversationRequest = new CometChat.ConversationsRequestBuilder().setConversationType(CometChat.ACTION_TYPE.TYPE_USER).setLimit(30).build();
-            break;
+                break;
             case chatListFilterOptions["GROUPS"]:
                 this.conversationRequest = new CometChat.ConversationsRequestBuilder().setConversationType(CometChat.ACTION_TYPE.TYPE_GROUP).setLimit(30).build();
                 break;
             default:
                 this.conversationRequest = new CometChat.ConversationsRequestBuilder().setLimit(30).build();
-            break;
+                break;
         }
     }
 
@@ -54,23 +54,26 @@ export class ConversationListManager {
             this.groupListenerId,
             new CometChat.GroupListener({
                 onGroupMemberScopeChanged: (message, changedUser, newScope, oldScope, changedGroup) => {
-                    callback(enums.GROUP_MEMBER_SCOPE_CHANGED, changedGroup, message, {"user": changedUser, "scope": newScope});
-                }, 
+                    callback(enums.GROUP_MEMBER_SCOPE_CHANGED, changedGroup, message, {
+                        "user": changedUser,
+                        "scope": newScope
+                    });
+                },
                 onGroupMemberKicked: (message, kickedUser, kickedBy, kickedFrom) => {
                     callback(enums.GROUP_MEMBER_KICKED, kickedFrom, message, {"user": kickedUser, "hasJoined": false});
-                }, 
+                },
                 onGroupMemberBanned: (message, bannedUser, bannedBy, bannedFrom) => {
                     callback(enums.GROUP_MEMBER_BANNED, bannedFrom, message, {"user": bannedUser});
-                }, 
+                },
                 onGroupMemberUnbanned: (message, unbannedUser, unbannedBy, unbannedFrom) => {
                     callback(enums.GROUP_MEMBER_UNBANNED, unbannedFrom, message, {"user": unbannedUser});
-                }, 
+                },
                 onMemberAddedToGroup: (message, userAdded, userAddedBy, userAddedIn) => {
                     callback(enums.GROUP_MEMBER_ADDED, userAddedIn, message, {"user": userAdded, "hasJoined": true});
-                }, 
+                },
                 onGroupMemberLeft: (message, leavingUser, group) => {
                     callback(enums.GROUP_MEMBER_LEFT, group, message, {"user": leavingUser});
-                }, 
+                },
                 onGroupMemberJoined: (message, joinedUser, joinedGroup) => {
                     callback(enums.GROUP_MEMBER_JOINED, joinedGroup, message, {"user": joinedUser});
                 }
@@ -105,7 +108,7 @@ export class ConversationListManager {
             this.callListenerId,
             new CometChat.CallListener({
                 onIncomingCallReceived: call => {
-                  callback(enums.INCOMING_CALL_RECEIVED, null, call);
+                    callback(enums.INCOMING_CALL_RECEIVED, null, call);
                 },
                 onIncomingCallCancelled: call => {
                     callback(enums.INCOMING_CALL_CANCELLED, null, call);
