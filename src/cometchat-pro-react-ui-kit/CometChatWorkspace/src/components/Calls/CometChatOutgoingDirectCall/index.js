@@ -1,24 +1,24 @@
 import React from "react";
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx } from "@emotion/core";
+import {jsx} from "@emotion/core";
 import PropTypes from "prop-types";
-import { CometChat } from "@cometchat-pro/chat";
+import {CometChat} from "@cometchat-pro/chat";
 
-import { CometChatCallScreen } from "../CometChatCallScreen";
+import {CometChatCallScreen} from "../CometChatCallScreen";
 
-import { CometChatContext } from "../../../util/CometChatContext";
-import { ID, getUnixTimestamp } from "../../../util/common";
+import {CometChatContext} from "../../../util/CometChatContext";
+import {ID, getUnixTimestamp} from "../../../util/common";
 import * as enums from "../../../util/enums.js";
 
 import Translator from "../../../resources/localization/translator";
-import { theme } from "../../../resources/theme";
+import {theme} from "../../../resources/theme";
 
 class CometChatOutgoingDirectCall extends React.Component {
 
     sessionID;
     static contextType = CometChatContext;
-    
+
     constructor(props) {
 
         super(props);
@@ -28,7 +28,7 @@ class CometChatOutgoingDirectCall extends React.Component {
         }
 
         this.callScreenRef = React.createRef();
-        
+
         CometChat.getLoggedinUser().then(user => this.loggedInUser = user).catch(error => {
             console.error(error);
         });
@@ -36,14 +36,14 @@ class CometChatOutgoingDirectCall extends React.Component {
 
     actionHandler = (action) => {
 
-        switch(action) {
+        switch (action) {
 
             case enums.ACTIONS["DIRECT_CALL_ENDED"]:
             case enums.ACTIONS["DIRECT_CALL_ERROR"]:
-                this.setState({ callInProgress: null });
-            break;
+                this.setState({callInProgress: null});
+                break;
             default:
-            break;
+                break;
         }
     }
 
@@ -57,8 +57,8 @@ class CometChatOutgoingDirectCall extends React.Component {
         }
 
         const customMessage = this.prepareCustomMessageData();
-        this.setState({ callInProgress: customMessage });
-        if(this.context) {
+        this.setState({callInProgress: customMessage});
+        if (this.context) {
             this.context.setCallInProgress(customMessage, enums.CONSTANTS["OUTGOING_DIRECT_CALLING"]);
         }
 
@@ -77,7 +77,7 @@ class CometChatOutgoingDirectCall extends React.Component {
         }
 
         const customMessage = this.prepareCustomMessageData();
-        this.setState({ callInProgress: customMessage });
+        this.setState({callInProgress: customMessage});
         if (this.context) {
             this.context.setCallInProgress(customMessage, enums.CONSTANTS["OUTGOING_DIRECT_CALLING"]);
         }
@@ -86,7 +86,11 @@ class CometChatOutgoingDirectCall extends React.Component {
     prepareCustomMessageData = () => {
 
         const receiverType = CometChat.RECEIVER_TYPE.GROUP;
-        const customData = { "sessionID": this.sessionID, "sessionId": this.sessionID, "callType": CometChat.CALL_TYPE.VIDEO };
+        const customData = {
+            "sessionID": this.sessionID,
+            "sessionId": this.sessionID,
+            "callType": CometChat.CALL_TYPE.VIDEO
+        };
         const customType = enums.CUSTOM_TYPE_MEETING;
         const conversationId = `group_${this.sessionID}`;
 
@@ -107,12 +111,12 @@ class CometChatOutgoingDirectCall extends React.Component {
 
         CometChat.sendCustomMessage(customMessage).then(message => {
 
-            const newMessageObj = { ...message, "_id": customMessage._id };
+            const newMessageObj = {...message, "_id": customMessage._id};
             this.props.actionGenerated(enums.ACTIONS["MESSAGE_SENT"], [newMessageObj]);
 
         }).catch(error => {
 
-            const newMessageObj = { ...customMessage, "error": error };
+            const newMessageObj = {...customMessage, "error": error};
             this.props.actionGenerated(enums.ACTIONS["ERROR_IN_SENDING_MESSAGE"], [newMessageObj]);
 
             const errorCode = (error && error.hasOwnProperty("code")) ? error.code : "ERROR";
@@ -123,10 +127,12 @@ class CometChatOutgoingDirectCall extends React.Component {
     render() {
 
         let callScreen = null;
-        if(this.state.callInProgress) {
+        if (this.state.callInProgress) {
 
             callScreen = (
-                <CometChatCallScreen ref={el => this.callScreenRef = el} loggedInUser={this.loggedInUser} call={this.state.callInProgress} lang={this.props.lang} actionGenerated={this.actionHandler} />
+                <CometChatCallScreen ref={el => this.callScreenRef = el} loggedInUser={this.loggedInUser}
+                                     call={this.state.callInProgress} lang={this.props.lang}
+                                     actionGenerated={this.actionHandler}/>
             );
         }
         return callScreen;
@@ -144,4 +150,4 @@ CometChatOutgoingDirectCall.propTypes = {
     theme: PropTypes.object,
 }
 
-export { CometChatOutgoingDirectCall };
+export {CometChatOutgoingDirectCall};
