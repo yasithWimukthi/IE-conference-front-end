@@ -32,7 +32,7 @@ export const unifiedSidebarStyle = (state, props) => {
 
     const sidebarView = (state.sidebarview) ? {
         left: "0",
-        boxShadow : "rgba(0, 0, 0, .4) -30px 0 30px 30px"
+        boxShadow: "rgba(0, 0, 0, .4) -30px 0 30px 30px"
     } : {};
 
     const mq = [...props.theme.breakPoints];
