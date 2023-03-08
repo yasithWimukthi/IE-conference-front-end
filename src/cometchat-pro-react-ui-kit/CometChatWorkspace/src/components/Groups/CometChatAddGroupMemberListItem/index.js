@@ -1,22 +1,22 @@
-import { useState, useContext } from "react";
+import {useState, useContext} from "react";
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx } from "@emotion/core";
+import {jsx} from "@emotion/core";
 import PropTypes from "prop-types";
 
-import { CometChatAvatar, CometChatUserPresence } from "../../Shared";
+import {CometChatAvatar, CometChatUserPresence} from "../../Shared";
 
-import { CometChatContext } from "../../../util/CometChatContext";
+import {CometChatContext} from "../../../util/CometChatContext";
 
-import { theme } from "../../../resources/theme";
+import {theme} from "../../../resources/theme";
 
 import {
-	modalRowStyle,
-	modalColumnStyle,
-	avatarStyle,
-	nameStyle,
-	selectionColumnStyle,
-	selectionBoxStyle
+    modalRowStyle,
+    modalColumnStyle,
+    avatarStyle,
+    nameStyle,
+    selectionColumnStyle,
+    selectionBoxStyle
 } from "./style";
 
 import inactiveIcon from "./resources/group-member-unselect.svg";
@@ -24,67 +24,69 @@ import activeIcon from "./resources/group-member-select.svg";
 
 const CometChatAddGroupMemberListItem = (props) => {
 
-	const { groupMembers, theme } = useContext(CometChatContext);
+    const {groupMembers, theme} = useContext(CometChatContext);
 
-	const [checked, setChecked] = useState(() => {
-		const found = groupMembers.find(member => member.uid === props.user.uid);
-		const value = (found) ? true : false;
+    const [checked, setChecked] = useState(() => {
+        const found = groupMembers.find(member => member.uid === props.user.uid);
+        const value = (found) ? true : false;
 
-		return value;
-	});
+        return value;
+    });
 
-	const handleCheck = (event) => {
+    const handleCheck = (event) => {
 
-		const value = (checked === true) ? false : true;
-		setChecked(value);
-		props.changed(props.user, value);
-	}
+        const value = (checked === true) ? false : true;
+        setChecked(value);
+        props.changed(props.user, value);
+    }
 
-	const toggleTooltip = (event, flag) => {
+    const toggleTooltip = (event, flag) => {
 
-		const elem = event.currentTarget;
-		const nameContainer = elem.lastChild;
+        const elem = event.currentTarget;
+        const nameContainer = elem.lastChild;
 
-		const scrollWidth = nameContainer.scrollWidth;
-		const clientWidth = nameContainer.clientWidth;
-		
-		if(scrollWidth <= clientWidth) {
-			return false;
-		}
+        const scrollWidth = nameContainer.scrollWidth;
+        const clientWidth = nameContainer.clientWidth;
 
-		if(flag) {
-			nameContainer.setAttribute("title", nameContainer.textContent);
-		} else {
-			nameContainer.removeAttribute("title");
-		}
-	}
-	
-	return (
-		<div css={modalRowStyle(theme)}>
-			<div css={modalColumnStyle()} className="userinfo" onMouseEnter={event => toggleTooltip(event, true)} onMouseLeave={event => toggleTooltip(event, false)}>
-				<div css={avatarStyle()} className="avatar">
-					<CometChatAvatar user={props.user} />
-					<CometChatUserPresence status={props.user.status} />
-				</div>
-				<div css={nameStyle()} className="name">
-					{props.user.name}
-				</div>
-			</div>
-			<div css={selectionColumnStyle()} className="selection">
-				<input css={selectionBoxStyle(inactiveIcon, activeIcon, theme)} type="checkbox" checked={checked} id={props.user.uid + "sel"} onChange={handleCheck} />
-				<label htmlFor={props.user.uid + "sel"}>&nbsp;</label>
-			</div>
-		</div>
-	);
+        if (scrollWidth <= clientWidth) {
+            return false;
+        }
+
+        if (flag) {
+            nameContainer.setAttribute("title", nameContainer.textContent);
+        } else {
+            nameContainer.removeAttribute("title");
+        }
+    }
+
+    return (
+        <div css={modalRowStyle(theme)}>
+            <div css={modalColumnStyle()} className="userinfo" onMouseEnter={event => toggleTooltip(event, true)}
+                 onMouseLeave={event => toggleTooltip(event, false)}>
+                <div css={avatarStyle()} className="avatar">
+                    <CometChatAvatar user={props.user}/>
+                    <CometChatUserPresence status={props.user.status}/>
+                </div>
+                <div css={nameStyle()} className="name">
+                    {props.user.name}
+                </div>
+            </div>
+            <div css={selectionColumnStyle()} className="selection">
+                <input css={selectionBoxStyle(inactiveIcon, activeIcon, theme)} type="checkbox" checked={checked}
+                       id={props.user.uid + "sel"} onChange={handleCheck}/>
+                <label htmlFor={props.user.uid + "sel"}>&nbsp;</label>
+            </div>
+        </div>
+    );
 }
 
 // Specifies the default values for props:
 CometChatAddGroupMemberListItem.defaultProps = {
-	theme: theme
+    theme: theme
 };
 
 CometChatAddGroupMemberListItem.propTypes = {
-	theme: PropTypes.object
+    theme: PropTypes.object
 }
 
-export { CometChatAddGroupMemberListItem };
+export {CometChatAddGroupMemberListItem};
