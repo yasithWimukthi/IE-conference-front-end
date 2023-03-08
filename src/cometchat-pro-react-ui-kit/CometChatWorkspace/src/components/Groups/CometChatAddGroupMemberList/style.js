@@ -66,8 +66,8 @@ export const modalCaptionStyle = (dir) => {
     const textAlignStyle = (dir === "rtl") ? {
         textAlign: "right",
         paddingRight: "32px",
-    } : { 
-        textAlign: "left", 
+    } : {
+        textAlign: "left",
     };
 
     return {
@@ -91,18 +91,18 @@ export const modalErrorStyle = (context) => {
 }
 
 export const modalSearchStyle = () => {
-	return {
-		fontWeight: "normal",
-		marginBottom: "16px",
-		width: "100%",
+    return {
+        fontWeight: "normal",
+        marginBottom: "16px",
+        width: "100%",
         height: "35px",
-		borderRadius: "8px",
-		boxShadow: "rgba(20, 20, 20, 0.04) 0 0 0 1px inset",
-		backgroundColor: "rgba(20, 20, 20, 0.04)",
+        borderRadius: "8px",
+        boxShadow: "rgba(20, 20, 20, 0.04) 0 0 0 1px inset",
+        backgroundColor: "rgba(20, 20, 20, 0.04)",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-	};
+    };
 };
 
 export const searchButtonStyle = (img, context) => {
@@ -156,8 +156,8 @@ export const modalFootStyle = (props, state, img, context) => {
         background: `url(${img}) ${context.theme.primaryColor} no-repeat right 10px center`,
     } : {};
 
-    const textMargin = state.addingMembers ? { marginRight: "24px" } : {};
-    
+    const textMargin = state.addingMembers ? {marginRight: "24px"} : {};
+
     return {
         margin: "24px auto 0 auto",
         "button": {
@@ -190,11 +190,11 @@ export const contactMsgStyle = () => {
 }
 
 export const contactMsgTxtStyle = context => {
-	return {
-		margin: "0",
-		height: "30px",
-		color: `${context.theme.color.secondary}`,
-		fontSize: "20px!important",
-		fontWeight: "600",
-	};
+    return {
+        margin: "0",
+        height: "30px",
+        color: `${context.theme.color.secondary}`,
+        fontSize: "20px!important",
+        fontWeight: "600",
+    };
 };
