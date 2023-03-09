@@ -15,21 +15,21 @@ export const modalRowStyle = (context) => {
 }
 
 export const userStyle = context => {
-    
-	const mq = context.theme.breakPoints.map(x => `@media ${x}`);
 
-	return {
-		width: "calc(100% - 220px)",
-		[mq[0]]: {
-			width: "calc(100% - 185px)",
-		},
-		[mq[1]]: {
-			width: "calc(100% - 185px)",
-		},
-		[mq[2]]: {
-			width: "calc(100% - 185px)",
-		},
-	};
+    const mq = context.theme.breakPoints.map(x => `@media ${x}`);
+
+    return {
+        width: "calc(100% - 220px)",
+        [mq[0]]: {
+            width: "calc(100% - 185px)",
+        },
+        [mq[1]]: {
+            width: "calc(100% - 185px)",
+        },
+        [mq[2]]: {
+            width: "calc(100% - 185px)",
+        },
+    };
 };
 
 export const avatarStyle = () => {
