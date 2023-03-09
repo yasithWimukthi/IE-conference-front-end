@@ -42,7 +42,7 @@ export const modalCloseStyle = (img, context) => {
         top: "16px",
         right: "16px",
         mask: `url(${img}) center center no-repeat`,
-		backgroundColor: `${context.theme.primaryColor}`,
+        backgroundColor: `${context.theme.primaryColor}`,
         cursor: "pointer",
     }
 }
@@ -57,13 +57,13 @@ export const modalBodyStyle = () => {
 }
 
 export const modalErrorStyle = context => {
-	return {
-		fontSize: "12px",
-		color: `${context.theme.color.red}`,
-		textAlign: "center",
-		margin: "8px 0",
-		width: "100%",
-	};
+    return {
+        fontSize: "12px",
+        color: `${context.theme.color.red}`,
+        textAlign: "center",
+        margin: "8px 0",
+        width: "100%",
+    };
 };
 
 export const modalTableStyle = (props) => {
@@ -126,7 +126,7 @@ export const tableFootStyle = (context, state, img) => {
         background: `url(${img}) no-repeat right 10px center ${context.theme.primaryColor}`,
     } : {};
 
-    const textMargin = (state.creatingGroup) ? { marginRight: "24px", } : {};
+    const textMargin = (state.creatingGroup) ? {marginRight: "24px",} : {};
 
     return {
         display: "inline-block",
