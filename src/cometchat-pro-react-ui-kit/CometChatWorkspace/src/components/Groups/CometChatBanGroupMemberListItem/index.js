@@ -1,17 +1,17 @@
-import { useContext } from "react";
+import {useContext} from "react";
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx } from "@emotion/core";
+import {jsx} from "@emotion/core";
 import PropTypes from "prop-types";
-import { CometChat } from "@cometchat-pro/chat";
+import {CometChat} from "@cometchat-pro/chat";
 
-import { CometChatAvatar, CometChatUserPresence } from "../../Shared";
+import {CometChatAvatar, CometChatUserPresence} from "../../Shared";
 
-import { CometChatContext } from "../../../util/CometChatContext";
+import {CometChatContext} from "../../../util/CometChatContext";
 import * as enums from "../../../util/enums.js";
 
 import Translator from "../../../resources/localization/translator";
-import { theme } from "../../../resources/theme";
+import {theme} from "../../../resources/theme";
 
 import {
     modalRowStyle,
@@ -30,11 +30,13 @@ const CometChatBanGroupMemberListItem = (props) => {
 
     let name = props.member.name;
     let scope = context.roles[props.member.scope];
-    let unBan = (<i title={Translator.translate("UNBAN", context.language)} onClick={() => { props.actionGenerated(enums.ACTIONS["UNBAN_GROUP_MEMBER"], props.member)}} />);
+    let unBan = (<i title={Translator.translate("UNBAN", context.language)} onClick={() => {
+        props.actionGenerated(enums.ACTIONS["UNBAN_GROUP_MEMBER"], props.member)
+    }}/>);
 
     //if the loggedin user is moderator, don't allow unban of banned moderators or administrators
-    if (context.item.scope === CometChat.GROUP_MEMBER_SCOPE.MODERATOR 
-    && (props.member.scope === CometChat.GROUP_MEMBER_SCOPE.ADMIN || props.member.scope === CometChat.GROUP_MEMBER_SCOPE.MODERATOR)) {
+    if (context.item.scope === CometChat.GROUP_MEMBER_SCOPE.MODERATOR
+        && (props.member.scope === CometChat.GROUP_MEMBER_SCOPE.ADMIN || props.member.scope === CometChat.GROUP_MEMBER_SCOPE.MODERATOR)) {
         unBan = null;
     }
 
@@ -49,31 +51,31 @@ const CometChatBanGroupMemberListItem = (props) => {
 
         const elem = event.currentTarget;
         const nameContainer = elem.lastChild;
-    
+
         const scrollWidth = nameContainer.scrollWidth;
         const clientWidth = nameContainer.clientWidth;
-        
-        if(scrollWidth <= clientWidth) {
-          return false;
+
+        if (scrollWidth <= clientWidth) {
+            return false;
         }
-    
-        if(flag) {
-          nameContainer.setAttribute("title", nameContainer.textContent);
+
+        if (flag) {
+            nameContainer.setAttribute("title", nameContainer.textContent);
         } else {
-          nameContainer.removeAttribute("title");
+            nameContainer.removeAttribute("title");
         }
     }
-    
+
     return (
         <div css={modalRowStyle(context)}>
             <div css={userStyle(context)} className="userinfo"
-            onMouseEnter={event => toggleTooltip(event, true)}
-            onMouseLeave={event => toggleTooltip(event, false)}>
+                 onMouseEnter={event => toggleTooltip(event, true)}
+                 onMouseLeave={event => toggleTooltip(event, false)}>
                 <div css={avatarStyle()} className="avatar">
-                    <CometChatAvatar user={props.member} />
+                    <CometChatAvatar user={props.member}/>
                     <CometChatUserPresence
-                    status={props.member.status}
-                    borderColor={props.theme.borderColor.primary} />
+                        status={props.member.status}
+                        borderColor={props.theme.borderColor.primary}/>
                 </div>
                 <div css={nameStyle()} className="name">{name}</div>
             </div>
@@ -92,4 +94,4 @@ CometChatBanGroupMemberListItem.propTypes = {
     theme: PropTypes.object
 }
 
-export { CometChatBanGroupMemberListItem };
+export {CometChatBanGroupMemberListItem};
