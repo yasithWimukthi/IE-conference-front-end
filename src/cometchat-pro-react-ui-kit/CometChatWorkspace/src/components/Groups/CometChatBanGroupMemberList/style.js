@@ -69,14 +69,14 @@ export const modalCaptionStyle = (dir) => {
 
 export const modalErrorStyle = context => {
 
-	return {
-		fontSize: "12px",
-		color: `${context.theme.color.red}`,
-		textAlign: "center",
-		padding: "8px 0",
-		width: "100%",
-		height: "31px",
-	};
+    return {
+        fontSize: "12px",
+        color: `${context.theme.color.red}`,
+        textAlign: "center",
+        padding: "8px 0",
+        width: "100%",
+        height: "31px",
+    };
 };
 
 export const modalListStyle = () => {
@@ -125,20 +125,20 @@ export const nameColumnStyle = (context) => {
 
 export const roleColumnStyle = context => {
 
-	const mq = context.theme.breakPoints.map(x => `@media ${x}`);
+    const mq = context.theme.breakPoints.map(x => `@media ${x}`);
 
-	return {
-		width: "150px",
-		[mq[0]]: {
-			width: "115px",
-		},
-		[mq[1]]: {
-			width: "115px",
-		},
-		[mq[2]]: {
-			width: "115px",
-		},
-	};
+    return {
+        width: "150px",
+        [mq[0]]: {
+            width: "115px",
+        },
+        [mq[1]]: {
+            width: "115px",
+        },
+        [mq[2]]: {
+            width: "115px",
+        },
+    };
 };
 
 export const actionColumnStyle = () => {
@@ -157,7 +157,7 @@ export const listStyle = () => {
         alignItems: "flex-start",
         width: "100%",
         height: "calc(100% - 33px)",
-        overflowY: "auto",        
+        overflowY: "auto",
     }
 }
 
