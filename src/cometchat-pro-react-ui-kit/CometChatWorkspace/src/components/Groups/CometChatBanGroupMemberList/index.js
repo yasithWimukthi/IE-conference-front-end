@@ -1,18 +1,18 @@
 import React from "react";
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx } from "@emotion/core";
+import {jsx} from "@emotion/core";
 import PropTypes from "prop-types";
-import { CometChat } from "@cometchat-pro/chat";
+import {CometChat} from "@cometchat-pro/chat";
 
-import { CometChatBanGroupMemberListItem } from "../";
-import { CometChatBackdrop } from "../../Shared";
+import {CometChatBanGroupMemberListItem} from "../";
+import {CometChatBackdrop} from "../../Shared";
 
-import { CometChatContext } from "../../../util/CometChatContext";
+import {CometChatContext} from "../../../util/CometChatContext";
 import * as enums from "../../../util/enums.js";
 
 import Translator from "../../../resources/localization/translator";
-import { theme } from "../../../resources/theme";
+import {theme} from "../../../resources/theme";
 
 import {
     modalWrapperStyle,
@@ -51,18 +51,18 @@ class CometChatBanGroupMemberList extends React.Component {
     componentDidMount() {
 
         if (this.context.bannedGroupMembers.length === 0) {
-            this.setState({ decoratorMessage: Translator.translate("NO_BANNED_MEMBERS_FOUND", this.context.language) });
+            this.setState({decoratorMessage: Translator.translate("NO_BANNED_MEMBERS_FOUND", this.context.language)});
         } else {
-            this.setState({ decoratorMessage: "" });
+            this.setState({decoratorMessage: ""});
         }
     }
 
     componentDidUpdate() {
-        
+
         if (this.context.bannedGroupMembers.length === 0 && this.state.decoratorMessage === "") {
-            this.setState({ decoratorMessage: Translator.translate("NO_BANNED_MEMBERS_FOUND", this.context.language) });
+            this.setState({decoratorMessage: Translator.translate("NO_BANNED_MEMBERS_FOUND", this.context.language)});
         } else if (this.context.bannedGroupMembers.length && this.state.decoratorMessage.length) {
-            this.setState({ decoratorMessage: "" });
+            this.setState({decoratorMessage: ""});
         }
     }
 
@@ -70,19 +70,19 @@ class CometChatBanGroupMemberList extends React.Component {
 
         const guid = this.context.item.guid;
         CometChat.unbanGroupMember(guid, memberToUnBan.uid).then(response => {
-            
-            if(response) {
+
+            if (response) {
                 this.props.actionGenerated(enums.ACTIONS["UNBAN_GROUP_MEMBER_SUCCESS"], [memberToUnBan]);
             } else {
-                this.setState({ errorMessage: Translator.translate("SOMETHING_WRONG", this.context.language) });
+                this.setState({errorMessage: Translator.translate("SOMETHING_WRONG", this.context.language)});
             }
 
-        }).catch(error => this.setState({ errorMessage: Translator.translate("SOMETHING_WRONG", this.context.language) }));
+        }).catch(error => this.setState({errorMessage: Translator.translate("SOMETHING_WRONG", this.context.language)}));
     }
 
     updateMembers = (action, member) => {
 
-        switch(action) {
+        switch (action) {
             case enums.ACTIONS["UNBAN_GROUP_MEMBER"]:
                 this.unbanMember(member);
                 break;
@@ -98,18 +98,18 @@ class CometChatBanGroupMemberList extends React.Component {
             this.props.actionGenerated(enums.ACTIONS["FETCH_BANNED_GROUP_MEMBERS"]);
         }
     }
-    
+
     render() {
-        
+
         const membersList = [...this.context.bannedGroupMembers];
         const bannedMembers = membersList.map((member, key) => {
 
             return (
-                <CometChatBanGroupMemberListItem 
-                key={member.uid} 
-                member={member}
-                loggedinuser={this.props.loggedinuser}
-                actionGenerated={this.updateMembers} />);
+                <CometChatBanGroupMemberListItem
+                    key={member.uid}
+                    member={member}
+                    loggedinuser={this.props.loggedinuser}
+                    actionGenerated={this.updateMembers}/>);
 
         });
 
@@ -118,19 +118,23 @@ class CometChatBanGroupMemberList extends React.Component {
 
             messageContainer = (
                 <div css={contactMsgStyle()} className="bannedmembers__decorator-message">
-                    <p css={contactMsgTxtStyle(this.context)} className="decorator-message">{this.state.decoratorMessage}</p>
+                    <p css={contactMsgTxtStyle(this.context)}
+                       className="decorator-message">{this.state.decoratorMessage}</p>
                 </div>
             );
         }
-        
+
         return (
             <React.Fragment>
-                <CometChatBackdrop show={true} clicked={this.props.close} />
+                <CometChatBackdrop show={true} clicked={this.props.close}/>
                 <div css={modalWrapperStyle(this.context)} className="modal__bannedmembers">
-                    <span css={modalCloseStyle(clearIcon, this.context)} className="modal__close" onClick={this.props.close} title={Translator.translate("CLOSE", this.context.language)}></span>
+                    <span css={modalCloseStyle(clearIcon, this.context)} className="modal__close"
+                          onClick={this.props.close}
+                          title={Translator.translate("CLOSE", this.context.language)}></span>
 
                     <div css={modalBodyStyle()} className="modal__body">
-                        <div css={modalCaptionStyle(Translator.getDirection(this.context.language))} className="modal__title">
+                        <div css={modalCaptionStyle(Translator.getDirection(this.context.language))}
+                             className="modal__title">
                             {Translator.translate("BANNED_MEMBERS", this.context.language)}
                         </div>
                         <div css={modalErrorStyle(this.context)} className="modal__error">
@@ -171,4 +175,4 @@ CometChatBanGroupMemberList.propTypes = {
     theme: PropTypes.object
 }
 
-export { CometChatBanGroupMemberList };
+export {CometChatBanGroupMemberList};
