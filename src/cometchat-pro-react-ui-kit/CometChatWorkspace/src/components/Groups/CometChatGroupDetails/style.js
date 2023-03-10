@@ -101,7 +101,7 @@ export const contentItemStyle = () => {
         display: "flex",
         clear: "both",
         width: "100%",
-        padding:" 6px 0",
+        padding: " 6px 0",
         '&:first-of-type': {
             paddingTop: "0",
         },
