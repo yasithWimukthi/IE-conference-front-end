@@ -73,7 +73,7 @@ export const itemDetailStyle = () => {
     }
 }
 
-export const itemNameWrapperStyle = () => { 
+export const itemNameWrapperStyle = () => {
 
     return {
         fontSize: "15px",
@@ -85,7 +85,7 @@ export const itemNameWrapperStyle = () => {
     }
 }
 
-export const itemDescStyle = (context) => { 
+export const itemDescStyle = (context) => {
 
     return {
         borderBottom: `1px solid ${context.theme.borderColor.primary}`,
