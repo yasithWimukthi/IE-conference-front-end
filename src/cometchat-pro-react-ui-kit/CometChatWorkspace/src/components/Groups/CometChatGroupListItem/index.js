@@ -1,25 +1,25 @@
 import React from "react";
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx } from "@emotion/core";
+import {jsx} from "@emotion/core";
 import PropTypes from "prop-types";
-import { CometChat } from "@cometchat-pro/chat";
+import {CometChat} from "@cometchat-pro/chat";
 
-import { CometChatAvatar } from "../../Shared";
-import { CometChatContext } from "../../../util/CometChatContext";
+import {CometChatAvatar} from "../../Shared";
+import {CometChatContext} from "../../../util/CometChatContext";
 
-import { theme } from "../../../resources/theme";
+import {theme} from "../../../resources/theme";
 import Translator from "../../../resources/localization/translator";
 
 import {
-	listItem,
-	listItemIcon,
-	itemIconStyle,
-	itemThumbnailStyle,
-	itemDetailStyle,
-	itemNameWrapperStyle,
-	itemDescStyle,
-	listItemName  
+    listItem,
+    listItemIcon,
+    itemIconStyle,
+    itemThumbnailStyle,
+    itemDetailStyle,
+    itemNameWrapperStyle,
+    itemDescStyle,
+    listItemName
 } from "./style";
 
 import shieldIcon from "./resources/password-protected-group.svg";
@@ -27,72 +27,79 @@ import lockIcon from "./resources/private-group.svg";
 
 class CometChatGroupListItem extends React.PureComponent {
 
-	static contextType = CometChatContext;
-	
-	toggleTooltip = (event, flag) => {
+    static contextType = CometChatContext;
 
-		const elem = event.target;
+    toggleTooltip = (event, flag) => {
 
-		const scrollWidth = elem.scrollWidth;
-		const clientWidth = elem.clientWidth;
+        const elem = event.target;
 
-		if (scrollWidth <= clientWidth) {
-			return false;
-		}
+        const scrollWidth = elem.scrollWidth;
+        const clientWidth = elem.clientWidth;
 
-		if (flag) {
-			elem.setAttribute("title", elem.textContent);
-		} else {
-			elem.removeAttribute("title");
-		}
-	}
+        if (scrollWidth <= clientWidth) {
+            return false;
+        }
 
-	clickHandler = () => {
-		this.props.clickHandler(this.props.group);
-	}
+        if (flag) {
+            elem.setAttribute("title", elem.textContent);
+        } else {
+            elem.removeAttribute("title");
+        }
+    }
 
-	render() {
+    clickHandler = () => {
+        this.props.clickHandler(this.props.group);
+    }
 
-		let groupTypeIcon = null;
-		if (this.props.group.type === CometChat.GROUP_TYPE.PRIVATE) {
+    render() {
 
-			groupTypeIcon = (<i css={itemIconStyle(shieldIcon, this.context)} title={Translator.translate("PRIVATE_GROUP", this.context.language)}></i>);
+        let groupTypeIcon = null;
+        if (this.props.group.type === CometChat.GROUP_TYPE.PRIVATE) {
 
-		} else if (this.props.group.type === CometChat.GROUP_TYPE.PASSWORD) {
+            groupTypeIcon = (<i css={itemIconStyle(shieldIcon, this.context)}
+                                title={Translator.translate("PRIVATE_GROUP", this.context.language)}></i>);
 
-			groupTypeIcon = (<i css={itemIconStyle(lockIcon, this.context)} title={Translator.translate("PROTECTED_GROUP", this.context.language)}></i>);
-		}
+        } else if (this.props.group.type === CometChat.GROUP_TYPE.PASSWORD) {
 
-		return (
-			<div css={listItem(this.props, this.context)} className="list__item" onClick={this.clickHandler}>
-				<div css={itemThumbnailStyle()} className="list__item__thumbnail">
-					<CometChatAvatar group={this.props.group} />
-				</div>
-				<div css={itemDetailStyle()} className="list__item__details" dir={Translator.getDirection(this.context.language)}>
-					<div css={itemNameWrapperStyle()} className="item__details__name" onMouseEnter={event => this.toggleTooltip(event, true)} onMouseLeave={event => this.toggleTooltip(event, false)}>
-						<p css={listItemName()}>{this.props.group.name}</p>
-						<div css={listItemIcon()}>{groupTypeIcon}</div>
-					</div>
-					<div css={itemDescStyle(this.context)} className="item__details__desc">{`${this.props.group.membersCount} ${Translator.translate("MEMBERS", this.context.language)}`}</div>
-				</div>
-			</div>
-		);
-	}
+            groupTypeIcon = (<i css={itemIconStyle(lockIcon, this.context)}
+                                title={Translator.translate("PROTECTED_GROUP", this.context.language)}></i>);
+        }
+
+        return (
+            <div css={listItem(this.props, this.context)} className="list__item" onClick={this.clickHandler}>
+                <div css={itemThumbnailStyle()} className="list__item__thumbnail">
+                    <CometChatAvatar group={this.props.group}/>
+                </div>
+                <div css={itemDetailStyle()} className="list__item__details"
+                     dir={Translator.getDirection(this.context.language)}>
+                    <div css={itemNameWrapperStyle()} className="item__details__name"
+                         onMouseEnter={event => this.toggleTooltip(event, true)}
+                         onMouseLeave={event => this.toggleTooltip(event, false)}>
+                        <p css={listItemName()}>{this.props.group.name}</p>
+                        <div css={listItemIcon()}>{groupTypeIcon}</div>
+                    </div>
+                    <div css={itemDescStyle(this.context)}
+                         className="item__details__desc">{`${this.props.group.membersCount} ${Translator.translate("MEMBERS", this.context.language)}`}</div>
+                </div>
+            </div>
+        );
+    }
 }
 
 // Specifies the default values for props:
 CometChatGroupListItem.defaultProps = {
-	theme: theme,
-	group: {},
-	selectedGroup: {},
-	clickHandler: () => { }
+    theme: theme,
+    group: {},
+    selectedGroup: {},
+    clickHandler: () => {
+    }
 };
 
 CometChatGroupListItem.propTypes = {
-	theme: PropTypes.object,
-	selectedGroup: PropTypes.oneOfType([PropTypes.object, PropTypes.shape(CometChat.Group)]),
-	group: PropTypes.oneOfType([PropTypes.object, PropTypes.shape(CometChat.Group)]),
-	clickHandler: PropTypes.func
+    theme: PropTypes.object,
+    selectedGroup: PropTypes.oneOfType([PropTypes.object, PropTypes.shape(CometChat.Group)]),
+    group: PropTypes.oneOfType([PropTypes.object, PropTypes.shape(CometChat.Group)]),
+    clickHandler: PropTypes.func
 }
 
-export { CometChatGroupListItem };
+export {CometChatGroupListItem};
